@@ -2,20 +2,18 @@
 
 ## Introduction
 
-I love GNU/Linux and I miss it when I had to use MacOS for work tasks. I wrote this guide so I can have arepetible procedure to setup my developer workspace.
+I love GNU/Linux and I miss it when I had to use MacOS for work tasks. I wrote this guide so I can have 
+repetible procedure to setup my developer workspace.
 
 ### Objetives
 
 The main objetive is to automatically execute the tasks in the post-setup process,
-personally I run this tasks every time after installing the operating system:
+personally I run this tasks every time after installing the operating system.
 
- * Install homebrew
- * Install git
- * Install cowsay
- * Install python
- * Install pip
- * Install homebrew core packages
- * Install homebrew cask packages
+We are going to use ansible to deploy:
+
+ * homebrew core packages
+ * homebrew cask packages
  * Install GNU CLI Utils
    * wget
    * curl
@@ -45,6 +43,47 @@ personally I run this tasks every time after installing the operating system:
    * drone
  * Install dotfiles
  
+## Requirements
+
+We are going to run all this procedures from the command line, so *bash* is required, we need a stable
+Internet connection to download all packages.
+
+You  need to install **homebrew** by hand before running this guide.
+
+```
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+Test using **brew** command:
+
+```
+$ brew version
+```
+
+Let's install python:
+
+```
+$ brew install python
+```
+
+After installing python we need to install pip package manager:
+
+```
+$ brew install python-pip
+```
+
+And finally install ansible:
+
+```
+$ brew install ansible
+```
+
+Test ansible is correctly installed:
+
+```
+$ ansible --version
+```
+
 ## Cloning the repository
 
 First we need to go the directory we are going to work, and clone the repository
