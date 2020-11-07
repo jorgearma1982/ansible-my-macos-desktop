@@ -1,0 +1,14 @@
+---
+# handlers file for common
+
+- name: update timezone
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  tags:
+    - system_service
+    - system_settings_timezone
+
+- name: Apply sysctl system
+  command: sysctl --system
+  tags:
+    - system_settings
+    - system_settings_kernel
