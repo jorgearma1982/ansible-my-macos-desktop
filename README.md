@@ -2,7 +2,7 @@
 
 ## Introduction
 
-I love GNU/Linux and I miss it when I had to use MacOS for work tasks. I wrote this guide so I can have aa repetible procedure to setup a develop workspace.
+I love GNU/Linux and I miss it when I had to use MacOS for work tasks. I wrote this guide so I can have arepetible procedure to setup my developer workspace.
 
 ### Objetives
 
@@ -29,16 +29,22 @@ personally I run this tasks every time after installing the operating system:
    * autoconf
    * make
  * Install third party tools
-   * Firefox
-   * Chrome
-   * Kitty
-   * VirtualBox
-   * Vagrant
-   * Teamviewer
-   * Zoom
-   * Oh my Zsh
+   * oh-my-zsh
+   * firefox
+   * kitty
+ * Install Virtualization & Cloud Toolkit
+   * virtualbox
+   * vagrant
+   * gcloud
+   * awscli
+   * packer
+   * terraform
+   * docker
+   * kubectl
+   * helm
+   * drone
  * Install dotfiles
- * 
+ 
 ## Cloning the repository
 
 First we need to go the directory we are going to work, and clone the repository
