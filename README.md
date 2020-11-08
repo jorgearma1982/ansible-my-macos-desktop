@@ -1,16 +1,16 @@
-# Ansible for my work MacOS Desktop
+# Ansible for my work macos desktop
 
 ## Introduction
 
-I love GNU/Linux and I miss it when I had to use MacOS for work tasks. I wrote this guide so I can have 
-repetible procedure to setup my developer workspace.
+I love GNU/Linux and I miss it every time I have to use MacOS for work tasks, so I wrote this guide so I can have 
+a repetible procedure to setup my developer workspace using most of the GNU programs I love on MacOS.
 
-### Objetives
+We are automating the post-setup process which is all the tasks we run after installing MacOS from scratch.
 
-The main objetive is to automatically execute the tasks in the post-setup process,
-personally I run this tasks every time after installing the operating system.
+### Objectives
 
-We are going to use ansible to deploy:
+The main objective is to automatically execute the tasks in the post-setup process, personally I run this tasks
+every time after installing the operating system. We are going to use ansible to deploy:
 
  * homebrew core packages
  * homebrew cask packages
@@ -45,44 +45,8 @@ We are going to use ansible to deploy:
  
 ## Requirements
 
-We are going to run all this procedures from the command line, so *bash* is required, we need a stable
+We are going to run all this procedures from the command line, so *bash* is required, we also need a stable
 Internet connection to download all packages.
-
-You  need to install **homebrew** by hand before running this guide.
-
-```
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-```
-
-Test using **brew** command:
-
-```
-$ brew version
-```
-
-Let's install python:
-
-```
-$ brew install python
-```
-
-After installing python we need to install pip package manager:
-
-```
-$ brew install python-pip
-```
-
-And finally install ansible:
-
-```
-$ brew install ansible
-```
-
-Test ansible is correctly installed:
-
-```
-$ ansible --version
-```
 
 ## Cloning the repository
 
