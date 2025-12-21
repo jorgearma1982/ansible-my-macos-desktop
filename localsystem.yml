@@ -2,7 +2,6 @@
 - hosts: localhost
   connection: local
   user: jmedina
-  become: yes
   roles:
     - common
 
