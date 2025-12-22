@@ -98,3 +98,11 @@ So, it looks like this:
 
 As you could see in the playbook header, we connect to localhost with the local user jmedina and use sudo to
 gain privileges.
+
+Let's run this playbook and deploy the configuration:
+
+```shell
+ansible-playbook localsystem.yml -K
+```
+
+You should provide your sudo password to authenticate.
