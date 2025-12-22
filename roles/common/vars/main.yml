@@ -1,3 +1,116 @@
 ---
-# vars file for common
+homebrew_upgrade_packages: true
 
+homebrew_cask_packages:
+  - visual-studio-code
+  - localsend
+
+homebrew_browsers_packages:
+  - google-chrome
+  - brave-browser
+  - firefox
+
+homebrew_gnu_packages:
+  - git
+  - wget
+  - curl
+  - coreutils
+  - gnu-time
+  - gnu-sed
+  - watch
+  - make
+  - autoconf
+  - gpg2
+  - gettext
+  - readline
+  - openssl
+  - ssh-copy-id
+  - pv
+  - zlib
+
+homebrew_files_packages:
+  - gnu-tar
+  - rsync
+  - tree
+  - unzip
+  - rar
+  - unrar
+  - p7zip
+
+homebrew_video_packages:
+  - obs
+  - vlc
+
+homebrew_term_packages:
+  - kitty
+
+homebrew_search_packages:
+  - fzf
+  - ack
+  - the_silver_searcher
+  - ripgrep
+  - maccy
+
+homebrew_monitor_packages:
+  - multitail
+  - htop
+  - btop
+
+homebrew_databases_packages:
+  - postgresql
+  - dbeaver-community
+
+homebrew_develop_packages:
+  - mas
+  - asdf
+  - python
+  - golang
+  - openjdk
+  - npm
+  - yarn
+  - yamllint
+  - jq
+  - yq
+
+homebrew_network_packages:
+  - ipcalc
+  - mtr
+  - nmap
+  - grpcurl
+  - httpie
+  - nikto
+  - zap
+  - speedtest-cli
+
+homebrew_devops_packages:
+  - cookiecutter
+  - gitleaks
+  - pre-commit
+  - shellcheck
+  - gh
+  - qemu
+  - colima
+  - docker
+  - docker-buildx
+  - docker-compose
+  - lazydocker
+  - kind
+  - k6
+  - argocd
+  - velero
+  - google-cloud-sdk
+  - awscli
+  - tfenv
+  - terraformer
+  - terragrunt
+  - tfsec
+  - kubectl
+  - helm
+  - k9s
+  - ansible
+  - pwgen
+  - pass
+  - keepassxc
+  - direnv
+  - hugo
+  - noir
