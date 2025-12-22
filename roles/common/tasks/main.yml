@@ -1,10 +1,105 @@
 ---
 # tasks file for common
 
-- debug:
-    msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+- name: Asegurar que los paquetes cask estan instalados
+  homebrew_cask:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_cask_packages }}"
 
-- debug:
-    msg: System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}
-  when: ansible_default_ipv4.gateway is defined
+- name: Asegurar que los paquetes navegadores estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_browsers_packages }}"
 
+- name: Asegurar que los paquetes GNU estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_gnu_packages }}"
+
+- name: Asegurar que los paquetes de manejo de archivos estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_files_packages }}"
+
+- name: Asegurar que los paquetes de las terminales estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_term_packages }}"
+
+- name: Asegurar que los paquetes de busqueda estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_search_packages }}"
+
+- name: Asegurar que los paquetes de monitoreo estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_monitor_packages }}"
+
+- name: Asegurar que los paquetes de bases de datos estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_databases_packages }}"
+
+- name: Asegurar que los paquetes de desarrollo estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_develop_packages }}"
+
+- name: Asegurar que los paquetes de redes estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_network_packages }}"
+
+- name: Asegurar que los paquetes de video estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_video_packages }}"
+
+- name: Asegurar que los paquetes de devops estan instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_network_packages }}"
+
+- name: Actualiza los paquetes de homebrew
+  homebrew:
+    update_homebrew: true
+    upgrade_all: true
+  when: homebrew_upgrade_packages
+  become: false
