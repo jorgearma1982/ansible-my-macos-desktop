@@ -3,8 +3,8 @@ homebrew_upgrade_packages: true
 
 homebrew_taps:
   - hashicorp/tap
- # - robusta-dev/homebrew-krr
- # - AKSarav/kubenodeusage
+  - robusta-dev/homebrew-krr
+  - AKSarav/kubenodeusage
 
 homebrew_cask_packages:
   - visual-studio-code
