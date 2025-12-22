@@ -1,6 +1,11 @@
 ---
 homebrew_upgrade_packages: true
 
+homebrew_taps:
+  - hashicorp/tap
+ # - robusta-dev/homebrew-krr
+ # - AKSarav/kubenodeusage
+
 homebrew_cask_packages:
   - visual-studio-code
   - localsend
@@ -34,7 +39,6 @@ homebrew_files_packages:
   - tree
   - unzip
   - rar
-  - unrar
   - p7zip
 
 homebrew_video_packages:
@@ -100,6 +104,9 @@ homebrew_devops_packages:
   - velero
   - google-cloud-sdk
   - awscli
+  - azure-cli
+  - kubectx
+  - packer
   - tfenv
   - terraformer
   - terragrunt
@@ -107,6 +114,8 @@ homebrew_devops_packages:
   - kubectl
   - helm
   - k9s
+  - krr
+  - kubenodeusage
   - ansible
   - pwgen
   - pass

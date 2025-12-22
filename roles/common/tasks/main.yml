@@ -1,15 +1,22 @@
 ---
 # tasks file for common
 
-- name: Asegurar que los paquetes cask estan instalados
-  homebrew_cask:
-    path: /opt/homebrew/bin/brew
+- name: Asegurar que el binario de homebrew esté en el PATH
+  ansible.builtin.lineinfile:
+    path: /etc/paths
+    state: present
+    line: '/opt/homebrew/bin'
+  become: true
+  become_user: root
+
+- name: Asegura que los repositorios Tap de homebrew estén activos
+  community.general.homebrew_tap:
     name: "{{ item.name | default(item) }}"
     state: present
   become: false
-  loop: "{{ homebrew_cask_packages }}"
+  loop: "{{ homebrew_taps }}"
 
-- name: Asegurar que los paquetes navegadores estan instalados
+- name: Asegurar que los paquetes Navegadores están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -17,7 +24,7 @@
   become: false
   loop: "{{ homebrew_browsers_packages }}"
 
-- name: Asegurar que los paquetes GNU estan instalados
+- name: Asegurar que los paquetes GNU CLI están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -25,7 +32,7 @@
   become: false
   loop: "{{ homebrew_gnu_packages }}"
 
-- name: Asegurar que los paquetes de manejo de archivos estan instalados
+- name: Asegurar que los paquetes de manejo de archivos están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -33,7 +40,7 @@
   become: false
   loop: "{{ homebrew_files_packages }}"
 
-- name: Asegurar que los paquetes de las terminales estan instalados
+- name: Asegurar que los paquetes de las Terminales están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -41,7 +48,7 @@
   become: false
   loop: "{{ homebrew_term_packages }}"
 
-- name: Asegurar que los paquetes de busqueda estan instalados
+- name: Asegurar que los paquetes de Búsqueda avanzada están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -49,7 +56,7 @@
   become: false
   loop: "{{ homebrew_search_packages }}"
 
-- name: Asegurar que los paquetes de monitoreo estan instalados
+- name: Asegurar que los paquetes de Monitoreo están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -57,7 +64,7 @@
   become: false
   loop: "{{ homebrew_monitor_packages }}"
 
-- name: Asegurar que los paquetes de bases de datos estan instalados
+- name: Asegurar que los paquetes de Bases de datos están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -65,7 +72,15 @@
   become: false
   loop: "{{ homebrew_databases_packages }}"
 
-- name: Asegurar que los paquetes de desarrollo estan instalados
+- name: Asegurar que los paquetes de Redes están instalados
+  homebrew:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_network_packages }}"
+
+- name: Asegurar que los paquetes de herramientas de Desarrollo están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -73,7 +88,15 @@
   become: false
   loop: "{{ homebrew_develop_packages }}"
 
-- name: Asegurar que los paquetes de redes estan instalados
+- name: Asegurar que los paquetes con GUI de cask están instalados
+  homebrew_cask:
+    path: /opt/homebrew/bin/brew
+    name: "{{ item.name | default(item) }}"
+    state: present
+  become: false
+  loop: "{{ homebrew_cask_packages }}"
+
+- name: Asegurar que los paquetes de herramientas DevOps están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
@@ -81,21 +104,13 @@
   become: false
   loop: "{{ homebrew_network_packages }}"
 
-- name: Asegurar que los paquetes de video estan instalados
+- name: Asegurar que los paquetes de herramientas de Video están instalados
   homebrew:
     path: /opt/homebrew/bin/brew
     name: "{{ item.name | default(item) }}"
     state: present
   become: false
   loop: "{{ homebrew_video_packages }}"
-
-- name: Asegurar que los paquetes de devops estan instalados
-  homebrew:
-    path: /opt/homebrew/bin/brew
-    name: "{{ item.name | default(item) }}"
-    state: present
-  become: false
-  loop: "{{ homebrew_network_packages }}"
 
 - name: Actualiza los paquetes de homebrew
   homebrew:
