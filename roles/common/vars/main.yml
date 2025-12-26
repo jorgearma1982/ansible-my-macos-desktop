@@ -110,7 +110,10 @@ homebrew_devops_packages:
   - tfenv
   - terraformer
   - terragrunt
+  - tflint
+  - terraform-docs
   - tfsec
+  - trivy
   - kubectl
   - helm
   - k9s
