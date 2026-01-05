@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Jorge Medina
+  description: Setup shell for mac.
+  company: KronOps
+  license: MIT
+  min_ansible_version: 2.8
+  platforms:
+  - name: macos
+    versions:
+    - sequoia
+  categories:
+  - destkop
+dependencies: []
