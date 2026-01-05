@@ -1,0 +1,4 @@
+---
+# defaults file for shell
+
+dotfiles_repo: git@github.com:jorgearma1982/dotfiles.git

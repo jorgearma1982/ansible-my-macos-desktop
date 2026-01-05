@@ -1,0 +1,5 @@
+---
+# tasks file for shell
+
+- name: Incluye las tareas para desplegar zsh
+  include_tasks: "zsh.yml"
