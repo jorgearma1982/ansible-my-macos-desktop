@@ -13,6 +13,10 @@ Role Variables
 
 These are default variables for this role:
 
+- `dotfiles_repo`: repositorio git que contiene tus dotfiles (se clona en `~/.dotfiles`).
+- `spell_languages`: lista de idiomas para descargar archivos de spell (por defecto `['en','es']`).
+- `spell_base_url`: URL base para descargar los ficheros de spell de Vim.
+
 Dependencies
 ------------
 
