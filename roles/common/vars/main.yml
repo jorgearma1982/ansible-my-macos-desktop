@@ -126,3 +126,6 @@ homebrew_devops_packages:
   - direnv
   - hugo
   - noir
+
+mas_apps:
+  - { id: 571213070, name: "DaVinci Resolve" }

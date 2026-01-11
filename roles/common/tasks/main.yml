@@ -118,3 +118,21 @@
     upgrade_all: true
   when: homebrew_upgrade_packages
   become: false
+
+- name: Asegurar que las aplicaciones MAS están instalados
+  community.general.mas:
+    id: "{{ item.id | default(item) }}"
+    state: present
+  loop: "{{ mas_apps }}"
+  loop_control:
+    label: "{{ item.name | default(item.id | default(item)) }}"
+  become: true
+  tags:
+    - mas
+
+- name: Actualiza las aplicaciones MAS
+  community.general.mas:
+    upgrade_all: true
+  become: true
+  tags:
+    - mas
