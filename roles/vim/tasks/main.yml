@@ -1,0 +1,70 @@
+---
+# tasks file for vim
+
+- name: Asegura que el paquete vim está instalado
+  community.general.homebrew:
+    name: vim
+    state: present
+  tags:
+    - vim
+
+- name: Asegurar que exista el directorio .vim/autoload
+  file:
+    path: "{{ ansible_facts.env.HOME }}/.vim/autoload"
+    state: directory
+    mode: '0755'
+  tags:
+    - vim
+
+- name: Descargar vim-plug en .vim/autoload
+  get_url:
+    url: "{{ vim_plug_url }}"
+    dest: "{{ ansible_facts.env.HOME }}/.vim/autoload/plug.vim"
+    mode: '0755'
+    force: no
+  tags:
+    - vim
+
+- name: Asegurar que exista el directorio .vim/spell
+  file:
+    path: "{{ ansible_facts.env.HOME }}/.vim/spell"
+    state: directory
+    mode: '0755'
+  tags:
+    - vim
+
+- name: Descargar archivos .spl de spell (idiomas)
+  get_url:
+    url: "{{ spell_base_url }}/{{ item }}.utf-8.spl"
+    dest: "{{ ansible_facts.env.HOME }}/.vim/spell/{{ item }}.utf-8.spl"
+    mode: '0644'
+    force: no
+  loop: "{{ spell_languages }}"
+  tags:
+    - vim
+
+- name: Descargar archivos .sug de spell (idiomas)
+  get_url:
+    url: "{{ spell_base_url }}/{{ item }}.utf-8.sug"
+    dest: "{{ ansible_facts.env.HOME }}/.vim/spell/{{ item }}.utf-8.sug"
+    mode: '0644'
+    force: no
+  loop: "{{ spell_languages }}"
+  tags:
+    - vim
+
+- name: Clonar repositorio dotfiles
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ ansible_facts.env.HOME }}/.dotfiles"
+    version: main
+  tags:
+    - vim
+
+- name: Ejecutar stow para vim
+  ansible.builtin.command:
+    cmd: "stow vim"
+    chdir: "{{ ansible_facts.env.HOME }}/.dotfiles"
+  notify: Instalar plugins de vim
+  tags:
+    - vim

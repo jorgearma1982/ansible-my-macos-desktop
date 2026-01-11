@@ -1,0 +1,7 @@
+---
+# Handlers for vim role
+- name: Instalar plugins de vim
+  shell: |
+    vim +'silent! PlugInstall --sync' +qall
+  environment:
+    HOME: "{{ ansible_facts.env.HOME }}"
