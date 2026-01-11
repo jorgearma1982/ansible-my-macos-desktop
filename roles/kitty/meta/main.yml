@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Jorge Medina
+  description: Tasks to install and configure the kitty terminal on macOS.
+  company: KronOps
+  license: MIT
+  min_ansible_version: 2.8
+  platforms:
+    - name: macos
+      versions:
+        - sequoia
+  categories:
+    - desktop
+dependencies:
+  - role: common
