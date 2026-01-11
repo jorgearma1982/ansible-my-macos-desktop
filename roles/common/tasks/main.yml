@@ -126,9 +126,13 @@
   loop: "{{ mas_apps }}"
   loop_control:
     label: "{{ item.name | default(item.id | default(item)) }}"
-  become: false
+  become: true
+  tags:
+    - mas
 
 - name: Actualiza las aplicaciones MAS
   community.general.mas:
     upgrade_all: true
-  become: false
+  become: true
+  tags:
+    - mas
