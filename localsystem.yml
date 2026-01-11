@@ -2,8 +2,9 @@
 - hosts: localhost
   connection: local
   user: jmedina
-  become: true
+  become: false
   roles:
     - common
     - shell
+    - vim
 

@@ -1,0 +1,42 @@
+---
+# tasks file for vim
+
+- name: Asegura que el paquete vim está instalado
+  community.general.homebrew:
+    name: vim
+    state: present
+  tags:
+    - vim
+
+- name: Asegurar que exista el directorio .vim/autoload
+  file:
+    path: "{{ ansible_facts.env.HOME }}/.vim/autoload"
+    state: directory
+    mode: '0755'
+  tags:
+    - vim
+
+- name: Descargar vim-plug en .vim/autoload
+  get_url:
+    url: "{{ vim_plug_url }}"
+    dest: "{{ ansible_facts.env.HOME }}/.vim/autoload/plug.vim"
+    mode: '0755'
+    force: no
+  tags:
+    - vim
+
+- name: Clonar repositorio dotfiles
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "/Users/{{ ansible_user }}/.dotfiles"
+    version: main
+  tags:
+    - vim
+
+- name: Ejecutar stow para vim
+  ansible.builtin.command:
+    cmd: "stow vim"
+    chdir: "/Users/{{ ansible_user }}/.dotfiles"
+  notify: Instalar plugins de vim
+  tags:
+    - vim
