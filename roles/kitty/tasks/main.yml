@@ -1,0 +1,50 @@
+---
+# tasks file for kitty
+- name: Asegura que el paquete kitty esté instalado
+  community.general.homebrew_cask:
+    name: kitty
+    state: present
+  tags:
+    - kitty
+
+- name: Crear directorio de configuración de kitty
+  ansible.builtin.file:
+    path: "{{ kitty_config_dir }}"
+    state: directory
+    mode: '0755'
+  tags:
+    - kitty
+
+- name: Clonar kitty-themes en el directorio de configuración
+  ansible.builtin.git:
+    repo: "{{ kitty_themes_repo }}"
+    dest: "{{ kitty_themes_dest }}"
+    version: master
+    depth: 1
+  tags:
+    - kitty
+
+- name: Crear enlace simbólico del tema Dracula
+  ansible.builtin.file:
+    src: "{{ kitty_themes_dest }}/{{ kitty_theme_source }}"
+    dest: "{{ kitty_theme_link }}"
+    state: link
+    force: yes
+  tags:
+    - kitty
+
+- name: Clonar repositorio dotfiles
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dest }}"
+    version: main
+    depth: 1
+  tags:
+    - kitty
+
+- name: Ejecutar stow para kitty
+  ansible.builtin.command:
+    cmd: "stow kitty"
+    chdir: "{{ dotfiles_dest }}"
+  tags:
+    - kitty

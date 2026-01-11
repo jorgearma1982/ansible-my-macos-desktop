@@ -1,0 +1,15 @@
+---
+# defaults file for kitty
+kitty_config_dir: "{{ lookup('env','HOME') }}/.config/kitty"
+
+# Dotfiles repo used to manage user configuration (stow will be executed)
+dotfiles_repo: git@github.com:jorgearma1982/dotfiles.git
+dotfiles_dest: "{{ lookup('env','HOME') }}/.dotfiles"
+
+# Kitty themes repository (used to fetch community themes)
+kitty_themes_repo: "https://github.com/dexpota/kitty-themes.git"
+kitty_themes_dest: "{{ kitty_config_dir }}/kitty-themes"
+# Path inside the themes repo to the Dracula theme file
+kitty_theme_source: "themes/Dracula.conf"
+# Path for the symlink that kitty will read as the active theme
+kitty_theme_link: "{{ kitty_config_dir }}/theme.conf"
