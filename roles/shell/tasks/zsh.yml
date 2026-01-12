@@ -1,69 +1,72 @@
 ---
 # tasks file for zsh shell
-
-- name: Asegura que zsh esté instalado
+- name: Asegura que el paquete del shell zsh y stow estén instalados
   community.general.homebrew:
     name:
       - zsh
       - stow
     state: present
-  become: false
+  tags:
+    - zsh
 
 - name: Configurar zsh como shell por defecto
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     shell: /bin/zsh
   become: true
+  tags:
+    - zsh
 
 - name: Descargar el script de instalación de ohmyzsh
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: "/tmp/install_ohmyzsh.sh"
     mode: '0755'
-  become: false
+  tags:
+    - zsh
 
 - name: Instalar ohmyzsh con argumento 
   ansible.builtin.script:
     cmd: "/tmp/install_ohmyzsh.sh --unattended"
   args:
     creates: "/Users/{{ ansible_user }}/.oh-my-zsh"
-  become: false
+  tags:
+    - zsh
 
 - name: Remueve .zshrc por defecto si existe
   ansible.builtin.file:
     path: "/Users/{{ ansible_user }}/.zshrc"
     state: absent
-  become: false
+  tags:
+    - zsh
 
 - name: Instala tema powerlevel10k
   ansible.builtin.git:
     repo: https://github.com/romkatv/powerlevel10k.git
     dest: "/Users/{{ ansible_user }}/.oh-my-zsh/custom/themes/powerlevel10k"
     depth: 1
-  become: false
+  tags:
+    - zsh
 
-- name: Descarga la fuente NerdFonts Meslo
-  ansible.builtin.get_url:
-    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
-    dest: "/tmp/Meslo.zip"
-    mode: '0644'
-  become: false
-
-- name: Descomprime la fuente NerdFonts Meslo
-  ansible.builtin.unarchive:
-    src: "/tmp/Meslo.zip"
-    dest: "/Users/{{ ansible_user }}/Library/Fonts/"
-  become: false
+- name: Asegurar que el paquete de la fuente Nerd Fonts Meslo
+  homebrew_cask:
+    path: /opt/homebrew/bin/brew
+    name: font-meslo-lg-nerd-font
+    state: present
+  tags:
+    - zsh
 
 - name: Clona repositorio dotfiles
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: "/Users/{{ ansible_user }}/.dotfiles"
     version: main
-  become: false
+  tags:
+    - zsh
 
 - name: Ejecuta stow para zsh
   ansible.builtin.command:
     cmd: "stow zsh"
     chdir: "/Users/{{ ansible_user }}/.dotfiles"
-  become: false
+  tags:
+    - zsh
