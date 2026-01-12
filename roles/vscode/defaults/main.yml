@@ -1,0 +1,22 @@
+---
+# Default variables for the vscode role
+
+# List of VSCode extensions to install (examples: Dev Containers, Ansible)
+vscode_extensions:
+  - zainchen.json
+  - davidanson.vscode-markdownlint
+  - ms-vscode-remote.remote-containers
+  - ms-vscode.remote-explorer
+  - ms-vscode-remote.remote-ssh
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - hashicorp.terraform
+  - 4ops.terraform
+  - editorconfig.editorconfig
+  - github.vscode-github-actions
+  - github.vscode-pull-request-github
+  - telokis.theme-dracula-at-dusk
+  - github.copilot-chat
+
+# Repo de dotfiles (personaliza a tu repositorio)
+dotfiles_repo: git@github.com:jorgearma1982/dotfiles.git

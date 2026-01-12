@@ -1,0 +1,45 @@
+---
+# Tasks for the vscode role
+
+- name: Asegura que el paquete de Visual Studio Code está instalado
+  community.general.homebrew_cask:
+    name: visual-studio-code
+    state: present
+  tags:
+    - vscode
+
+- name: Obtener lista de extensiones instaladas
+  ansible.builtin.command:
+    cmd: "code --list-extensions"
+  register: installed_exts
+  failed_when: false
+  changed_when: false
+  tags:
+    - vscode
+
+- name: Instalar extensiones de VSCode
+  ansible.builtin.command:
+    cmd: "code --install-extension {{ item }} --force"
+  loop: "{{ vscode_extensions }}"
+  register: install_results
+  failed_when: false
+  loop_control:
+    label: "{{ item }}"
+  tags:
+    - vscode
+
+- name: Clonar repositorio dotfiles
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ ansible_facts.env.HOME }}/.dotfiles"
+    version: main
+  tags:
+    - vscode
+
+- name: Ejecutar stow para desplegar vscode desde dotfiles
+  ansible.builtin.command:
+    cmd: "stow vscode"
+  args:
+    chdir: "{{ ansible_facts.env.HOME }}/.dotfiles"
+  tags:
+    - vscode
